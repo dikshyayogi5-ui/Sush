@@ -1,3 +1,70 @@
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffb6d5, #c4b5fd, #a5f3fc);
+  }
+
+  .card {
+    width: 100%;
+    max-width: 440px;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #fff7fc;
+    border: 3px solid white;
+    border-radius: 28px;
+    box-shadow: 0 15px 40px #8050a330;
+  }
+
+  h1 {
+    color: #db2777;
+  }
+
+  #question {
+    color: #7c3aed;
+    font-size: 23px;
+    font-weight: bold;
+  }
+
+  #progress {
+    color: #9333ea;
+  }
+
+  button {
+    margin: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 20px;
+    font-size: 17px;
+    cursor: pointer;
+    background: #fbcfe8;
+    color: #9d174d;
+  }
+
+  #answers button:nth-child(even) {
+    background: #bfdbfe;
+    color: #1e40af;
+  }
+
+  #nextBtn {
+    background: #ddd6fe;
+    color: #5b21b6;
+  }
+
+  #result {
+    min-height: 45px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+</style>
 <body>
   <div class="card">
     <h1>How well do you know me? 💖</h1>
@@ -19,6 +86,11 @@
         answers: ["Pink", "Blue"],
         correct: "Blue"
       },
+      {
+  question: "What is my favourite food?",
+  answers: ["Pizza", "Momo"],
+  correct: "Momo"
+}
       {
         question: "What kind of activity do I like to do?",
         answers: ["Adrenaline fun", "Late night Party"],
@@ -66,7 +138,7 @@
         result.textContent = "Correct! You know me well 💖";
         result.style.color = "#238636";
       } else {
-        result.textContent = "The right answer is: " + item.correct;
+        result.textContent = "Opps wrong 😅" + item.correct;
         result.style.color = "#b83280";
       }
 
