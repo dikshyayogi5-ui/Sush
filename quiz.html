@@ -90,7 +90,7 @@
   question: "What is my favourite food?",
   answers: ["Pizza", "Momo"],
   correct: "Momo"
-}
+},
       {
         question: "What kind of activity do I like to do?",
         answers: ["Adrenaline fun", "Late night Party"],
@@ -98,8 +98,8 @@
       },
       {
         question: "Who is my favourite person?",
-        answers: ["You", "Someone else"],
-        correct: "Of course you, silly 💖"
+        answers: ["You 💖", "Someone else"],
+        correct: "You 💖"
       }
     ];
 
@@ -135,10 +135,14 @@
 
       if (answer === item.correct) {
         score++;
-        result.textContent = "Correct! You know me well 💖";
+       if (item.question === "Who do I love most?") {
+  result.textContent = "Of course you, silly 💖";
+} else {
+  result.textContent = "Correct! You know me well 💖";
+},
         result.style.color = "#238636";
       } else {
-        result.textContent = "Opps wrong 😅" + item.correct;
+        result.textContent = "Opps wrong 😅";
         result.style.color = "#b83280";
       }
 
