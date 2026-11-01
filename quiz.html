@@ -1,14 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My Quiz</title>
-</head>
 <body>
-  <h1>How well do you know me?</h1>
-  <p>What is my favourite colour?</p>
+  <div class="card">
+    <h1>How well do you know me? 💖</h1>
+    <p id="progress"></p>
+    <p id="question"></p>
 
-  <button>Pink</button>
-  <button>Blue</button>
+    <div id="answers"></div>
+
+    <p id="result" aria-live="polite"></p>
+    <button id="nextBtn" onclick="nextQuestion()" hidden>
+      Next question →
+    </button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "What is my favourite colour?",
+        answers: ["Pink", "Blue"],
+        correct: "Blue"
+      },
+      {
+        question: "What kind of activity do I like to do?",
+        answers: ["Adrenaline fun", "Late night Party"],
+        correct: "Adrenaline fun"
+      },
+      {
+        question: "Who is my favourite person?",
+        answers: ["You", "Someone else"],
+        correct: "Of course you, silly 💖"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion() {
+      const item = questions[currentQuestion];
+
+      document.getElementById("progress").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+      document.getElementById("question").textContent = item.question;
+      document.getElementById("result").textContent = "";
+      document.getElementById("nextBtn").hidden = true;
+
+      const answers = document.getElementById("answers");
+      answers.replaceChildren();
+
+      item.answers.forEach(function(answer) {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.onclick = function() {
+          checkAnswer(answer);
+        };
+        answers.appendChild(button);
+      });
+    }
+
+    function checkAnswer(answer) {
+      const item = questions[currentQuestion];
+      const result = document.getElementById("result");
+
+      if (answer === item.correct) {
+        score++;
+        result.textContent = "Correct! You know me well 💖";
+        result.style.color = "#238636";
+      } else {
+        result.textContent = "The right answer is: " + item.correct;
+        result.style.color = "#b83280";
+      }
+
+      document.querySelectorAll("#answers button").forEach(function(button) {
+        button.disabled = true;
+      });
+
+      const nextButton = document.getElementById("nextBtn");
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "See my score ✨"
+          : "Next question →";
+      nextButton.hidden = false;
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById("progress").textContent = "Quiz complete! 🎉";
+        document.getElementById("question").textContent =
+          `You got ${score} out of ${questions.length}!`;
+        document.getElementById("answers").replaceChildren();
+        document.getElementById("result").textContent =
+          "You're still my favourite person 💖";
+
+        const nextButton = document.getElementById("nextBtn");
+        nextButton.textContent = "Play again";
+        nextButton.onclick = function() {
+          location.reload();
+        };
+      }
+    }
+
+    showQuestion();
+  </script>
 </body>
 </html>
