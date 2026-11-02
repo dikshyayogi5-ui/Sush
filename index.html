@@ -164,6 +164,12 @@ button {
     noBtn.addEventListener("click", moveButton);
 
     function moveButton() {
+         if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+    noBtn.style.transform = "none";
+    noBtn.dataset.x = "0";
+    noBtn.dataset.y = "0";
+    return;
+  }
   const rect = noBtn.getBoundingClientRect();
 
   const currentX = parseFloat(noBtn.dataset.x || "0");
