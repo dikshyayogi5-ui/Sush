@@ -91,6 +91,49 @@
             opacity: 0;
         }
     }
+   body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 350px;
+  padding: 24px;
+}
+
+h1 {
+  font-size: clamp(22px, 6vw, 28px);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  height: auto;
+  min-height: 60px;
+}
+
+#yesBtn {
+  margin-right: 0;
+}
+
+#noBtn {
+  position: static;
+}
+
+button {
+  min-height: 44px;
+}
+
+.message {
+  line-height: 1.6;
+}
 </style>
 </head>
 
@@ -121,10 +164,29 @@
     noBtn.addEventListener("click", moveButton);
 
     function moveButton() {
-        const x = Math.random() * 200;
-        const y = Math.random() * 40;
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    }
+  const rect = noBtn.getBoundingClientRect();
+
+  const currentX = parseFloat(noBtn.dataset.x || "0");
+  const currentY = parseFloat(noBtn.dataset.y || "0");
+
+  const baseX = rect.left - currentX;
+  const baseY = rect.top - currentY;
+
+  const x = 12 + Math.random() *
+    Math.max(0, window.innerWidth - rect.width - 24);
+
+  const y = 12 + Math.random() *
+    Math.max(0, window.innerHeight - rect.height - 24);
+
+  const offsetX = x - baseX;
+  const offsetY = y - baseY;
+
+  noBtn.dataset.x = offsetX;
+  noBtn.dataset.y = offsetY;
+
+  noBtn.style.transform =
+    `translate(${offsetX}px, ${offsetY}px)`;
+}
 
     // YES button action
     yesBtn.addEventListener("click", () => {
