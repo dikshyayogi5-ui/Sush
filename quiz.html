@@ -138,7 +138,7 @@
        if (item.correct === "You 💖") {
   result.textContent = "Of course you, silly 💖";
 } else {
-  result.textContent = "Correct! You know me well 💖";
+  result.textContent = "That's right 💖";
 }
         result.style.color = "#238636";
       } else {
@@ -168,8 +168,13 @@
         document.getElementById("question").textContent =
           `You got ${score} out of ${questions.length}!`;
         document.getElementById("answers").replaceChildren();
-        document.getElementById("result").textContent =
-          "You're still my favourite person 💖";
+        if (score === questions.length) {
+  document.getElementById("result").textContent =
+    "You know me well 😉";
+} else {
+  document.getElementById("result").textContent =
+    "You're still my favourite person 💖";
+}
 
         const nextButton = document.getElementById("nextBtn");
         nextButton.textContent = "Play again";
